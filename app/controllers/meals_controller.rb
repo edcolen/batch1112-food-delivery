@@ -20,4 +20,14 @@ class MealsController
     @meal_repository.create(meal)
     list
   end
+
+  def edit
+    list
+    id = @view.ask_user_for('id').to_i
+    meal = @meal_repository.find(id)
+    meal.name = @view.edit(meal.name, 'name')
+    meal.price = @view.edit(meal.price, 'price').to_i
+    @meal_repository.save_csv
+    list
+  end
 end

@@ -7,8 +7,23 @@ class CustomersView
   end
 
   def ask_user_for(info)
-    puts "What's the new customer's #{info}?"
+    message = if info == 'id'
+                'Choose a customer:'
+              else
+                "What's the new customer's #{info}?"
+              end
+    puts message
     print '> '
     gets.chomp
+  end
+
+  def edit(current_value, info)
+    Readline.pre_input_hook = lambda {
+      Readline.insert_text current_value.to_s
+      Readline.redisplay
+      Readline.pre_input_hook = nil
+    }
+    input = Readline.readline("#{info}: ", false)
+    input.gsub('"', '')
   end
 end
