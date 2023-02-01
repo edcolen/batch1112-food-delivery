@@ -30,4 +30,11 @@ class MealsController
     @meal_repository.save_csv
     list
   end
+
+  def remove
+    list
+    id = @view.ask_user_for('id').to_i
+    @meal_repository.destroy(id)
+    list
+  end
 end

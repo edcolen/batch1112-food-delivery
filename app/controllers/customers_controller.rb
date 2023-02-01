@@ -30,4 +30,11 @@ class CustomersController
     @customer_repository.save_csv
     list
   end
+
+  def remove
+    list
+    id = @view.ask_user_for('id').to_i
+    @customer_repository.destroy(id)
+    list
+  end
 end
